@@ -26,7 +26,7 @@ module Locomotive
         end
 
         def bushido_app_claimed?
-          ENV['BUSHIDO_CLAIMED'].present? && ENV['BUSHIDO_CLAIMED'].to_s.downcase == 'true'
+          Boolean.set(ENV['BUSHIDO_CLAIMED']) || false
         end
 
         def enable_bushido
