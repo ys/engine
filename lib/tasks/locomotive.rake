@@ -31,6 +31,13 @@ namespace :locomotive do
 
   desc 'Prepare for i18n'
   task :prepare_for_i18n => :environment do
+    Site.all.each do |site|
+      if site.locales.empty?
+        site.locales = [Locomotive.config.site_locales.first]
+        site.save
+      end
+    end
+
     Page.skip_callback(:validate, :before)
     Page.skip_callback(:save, :after)
 

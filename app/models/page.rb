@@ -33,6 +33,7 @@ class Page
   after_initialize :set_default_raw_template
   before_validation :normalize_slug
   before_save { |p| p.fullpath = p.fullpath(true) }
+  before_create :set_slug_and_fullpath_for_all_locales
   before_destroy :do_not_remove_index_and_404_pages
 
   ## validations ##
@@ -119,6 +120,16 @@ class Page
 
   def set_default_raw_template
     self.raw_template ||= I18n.t('attributes.defaults.pages.other.body')
+  end
+
+  def set_slug_and_fullpath_for_all_locales(locales = nil)
+    (locales || self.site.locales).each do |locale|
+      I18n.with_site_locale(locale) do
+        %w(slug fullpath).each do |meth|
+          self.send(:"#{meth}=", self.send(meth.to_sym))
+        end
+      end
+    end
   end
 
 end

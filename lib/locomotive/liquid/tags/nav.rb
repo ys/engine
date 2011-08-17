@@ -56,14 +56,15 @@ module Locomotive
 
         # Determines root node for the list
         def fetch_entries(context)
+          @current_site = context.registers[:site]
           @current_page = context.registers[:page]
 
           children = (case @source
-          when 'site'     then context.registers[:site].pages.root.minimal_attributes.first # start from home page
+          when 'site'     then @current_site.pages.root.minimal_attributes.first # start from home page
           when 'parent'   then @current_page.parent || @current_page
           when 'page'     then @current_page
           else
-            context.registers[:site].pages.fullpath(@source).minimal_attributes.first
+            @current_site.pages.fullpath(@source).minimal_attributes.first
           end).children_with_minimal_attributes.to_a
 
           children.delete_if { |p| !include_page?(p) }
@@ -72,6 +73,8 @@ module Locomotive
         # Returns a list element, a link to the page and its children
         def render_entry_link(page, css, depth)
           selected = @current_page.fullpath =~ /^#{page.fullpath}/ ? ' on' : ''
+
+          page.site = @current_site
 
           icon = @options[:icon] ? '<span></span>' : ''
           label = %{#{icon if @options[:icon] != 'after' }#{page.title}#{icon if @options[:icon] == 'after' }}

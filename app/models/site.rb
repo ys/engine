@@ -6,12 +6,12 @@ class Site
   ## Extensions ##
   extend Extensions::Site::SubdomainDomains
   extend Extensions::Site::FirstInstallation
+  include Extensions::Site::I18n
   include Extensions::Shared::Seo
 
   ## fields ##
   field :name
   field :robots_txt
-  field :locales, :type => Array, :default => []
 
   ## associations ##
   references_many :pages, :validate => false
@@ -33,10 +33,6 @@ class Site
   accepts_nested_attributes_for :memberships
 
   ## methods ##
-
-  def default_locale
-    self.locales.first || Locomotive.config.site_locales.first
-  end
 
   def all_pages_in_once
     Page.quick_tree(self)
