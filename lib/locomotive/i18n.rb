@@ -1,3 +1,4 @@
+# require 'ruby-debug'
 ## patches for the i18n support (aka multi languages support)
 require 'i18n'
 
@@ -33,13 +34,91 @@ module I18n
         end
       DELEGATORS
     end
+
+    # Executes block with given I18n.site_locale set.
+    def with_site_locale(tmp_locale = nil)
+      if tmp_locale
+        current_locale    = self.site_locale
+        self.site_locale  = tmp_locale
+      end
+      yield
+    ensure
+      self.site_locale = current_locale if tmp_locale
+    end
   end
 end
 
+## CARRIERWAVE ##
+require 'carrierwave/orm/mongoid'
+
+module CarrierWave
+  module Mongoid
+    def mount_uploader_with_localization(column, uploader=nil, options={}, &block)
+      mount_uploader_without_localization(column, uploader, options, &block)
+
+      define_method(:read_uploader) { |name| self.send(name.to_sym) }
+      define_method(:write_uploader) { |name, value| self.send(:"#{name.to_sym}=", value) }
+    end
+
+    alias_method_chain :mount_uploader, :localization
+  end
+end
+
+## MONGOID-I18n ##
+
 # TODO: fork https://github.com/Papipo/mongoid_i18n
 module Mongoid
+  module Criterion
+    class Selector< Hash
+      def []=(key, value)
+        key = "#{key}.#{::I18n.site_locale}" if fields[key.to_s].try(:type) == Mongoid::I18n::LocalizedField
+        super
+      end
+    end
+  end
+
   module I18n
+
+    included do
+      cattr_accessor :localized_fields_list
+    end
+
     module ClassMethods
+
+      def localized_fields(*args)
+        self.localized_fields_list = [*args].collect
+      end
+
+      def field(name, options = {})
+        if localized_field?(name)
+          options.merge!(:type => LocalizedField, :default => LocalizedField.new)
+        end
+        super
+      end
+
+      protected
+
+      def localized_field?(name)
+        # puts "options[:type] = #{options[:type].inspect} / #{(options[:type] == LocalizedField).inspect}"
+
+        # return true if options[:type] == LocalizedField
+
+        # puts "self.localized_fields_list = #{self.localized_fields_list.inspect} / #{meth.inspect}"
+
+        (self.localized_fields_list || []).any? do |rule|
+          case rule
+          when String, Symbol then name.to_s == rule.to_s
+          when Regexp then !(name.to_s =~ rule).nil?
+          else
+            false
+          end
+        end.tap do |result|
+          # options[:type] = LocalizedField if result
+
+          # puts "#{name.inspect}... localized ? #{result.inspect}"
+        end
+      end
+
       def create_accessors(name, meth, options = {})
         if options[:type] == LocalizedField
           if options[:use_default_if_empty] != false # nil or true
@@ -62,12 +141,13 @@ module Mongoid
             end
           end
           define_method("#{meth}=") do |value|
-            puts "@attributes[name].present? = #{@attributes[name].present?.inspect} / !@attributes[name].is_a?(Hash) #{(!@attributes[name].is_a?(Hash)).inspect}"
+            # debugger
+            # puts "@attributes[name].present? = #{@attributes[name].present?.inspect} / !@attributes[name].is_a?(Hash) #{(!@attributes[name].is_a?(Hash)).inspect}"
             if !@attributes[name].nil? && !@attributes[name].is_a?(Hash)
               @attributes[name] = { ::I18n.default_site_locale.to_s => @attributes[name] }
             end
 
-            puts "value = #{value.inspect} / #{meth}"
+            # puts "value = #{value.inspect} / #{meth}"
 
             value = if value.is_a?(Hash)
               (@attributes[name] || {}).merge(value)

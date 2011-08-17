@@ -11,24 +11,26 @@ BOARD:
   x rendering engine
     x get locale
     x render the right version
-  - contents
+  x contents
     x store the site locale value
-    - pages
+    x pages
       x title / slug / fullpath / seo
-      - template ?
-      - editable contents
-    - custom contents
-    - snippets
+      x template
+      x editable contents
+    x custom contents (models)
+    (- snippets)
     x site
       x seo
       x locale picker
   - liquid tags:
+    x locale switcher
+    x nav
     - link_to (new)
-    - nav
-    - locale switcher
-    - others ?    -
+    (- others ?)    -
   - other problems to solve:
-    - If you create a new page it shall always be created in the default_language, not depending on the used language in the backend.
+    x If you create a new page it shall always be created in the default_language, not depending on the used language in the backend.
+    - redirect for the default site locale if urls like /<default_site_locale>/....
+    - inline editing
 
 BACKLOG:
 

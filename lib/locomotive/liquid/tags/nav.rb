@@ -76,8 +76,8 @@ module Locomotive
           icon = @options[:icon] ? '<span></span>' : ''
           label = %{#{icon if @options[:icon] != 'after' }#{page.title}#{icon if @options[:icon] == 'after' }}
 
-          output  = %{<li id="#{page.slug.dasherize}-link" class="link#{selected} #{css}">}
-          output << %{<a href="/#{page.fullpath}">#{label}</a>}
+          output  = %{<li id="#{page.default_slug.dasherize}-link" class="link#{selected} #{css}">}
+          output << %{<a href="/#{page.fullpath_with_locale(I18n.site_locale)}">#{label}</a>}
           output << render_entry_children(page, depth.succ) if (depth.succ <= @options[:depth].to_i)
           output << %{</li>}
 
@@ -90,7 +90,7 @@ module Locomotive
 
           children = page.children_with_minimal_attributes.reject { |c| !include_page?(c) }
           if children.present?
-            output = %{<ul id="#{@options[:id]}-#{page.slug.dasherize}">}
+            output = %{<ul id="#{@options[:id]}-#{page.default_slug.dasherize}">}
             children.each do |c, page|
               css = []
               css << 'first' if children.first == c
@@ -115,8 +115,9 @@ module Locomotive
           end
         end
 
-        ::Liquid::Template.register_tag('nav', Nav)
       end
+
+      ::Liquid::Template.register_tag('nav', Nav)
     end
   end
 end

@@ -9,6 +9,8 @@ class ContentInstance
   include Extensions::Shared::Seo
 
   ## fields (dynamic fields) ##
+  localized_fields :_position_in_list, /^custom_field_/
+
   field :_slug
   field :_position_in_list, :type => Integer, :default => 0
   field :_visible, :type => Boolean, :default => true

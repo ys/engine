@@ -5,9 +5,9 @@ module Extensions
       extend ActiveSupport::Concern
 
       included do
-        field :serialized_template, :type => Binary
-        field :template_dependencies, :type => Array, :default => []
-        field :snippet_dependencies, :type => Array, :default => []
+        localized_field :serialized_template, :type => Binary
+        localized_field :template_dependencies, :type => Array, :default => []
+        localized_field :snippet_dependencies, :type => Array, :default => []
 
         attr_reader :template_changed
 
@@ -22,7 +22,7 @@ module Extensions
       module InstanceMethods
 
         def template
-          @template ||= Marshal.load(read_attribute(:serialized_template).to_s) rescue nil
+          @template ||= Marshal.load(self.serialized_template.to_s) rescue nil
         end
 
         protected

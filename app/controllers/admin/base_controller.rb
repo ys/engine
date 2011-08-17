@@ -90,6 +90,10 @@ module Admin
       I18n.site_locale = session[:site_locale]
     end
 
+    def back_to_default_site_locale
+      session[:site_locale] = I18n.site_locale = current_site.default_locale
+    end
+
     # ___ site/page urls builder ___
 
     def current_site_url

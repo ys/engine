@@ -5,6 +5,8 @@ module Admin
 
     respond_to :json, :only => [:update, :sort, :get_path]
 
+    before_filter :back_to_default_site_locale, :only => %w(new create)
+
     def index
       @pages = current_site.all_pages_in_once
     end

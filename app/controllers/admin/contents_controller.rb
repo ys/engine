@@ -11,6 +11,8 @@ module Admin
 
     before_filter :authorize_content
 
+    before_filter :back_to_default_site_locale, :only => %w(new create)
+
     helper_method :breadcrumb_root, :breadcrumb_url, :back_url
 
     def index

@@ -1,3 +1,5 @@
+require 'ruby-debug'
+
 module Extensions
   module Page
     module Render

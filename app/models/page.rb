@@ -17,7 +17,7 @@ class Page
   localized_field :title
   localized_field :slug
   localized_field :fullpath
-  field :raw_template
+  localized_field :raw_template
   field :published, :type => Boolean, :default => false
   field :cache_strategy, :default => 'none'
 
@@ -62,6 +62,10 @@ class Page
     self.index? || self.not_found?
   end
 
+  def default_slug
+    I18n.with_site_locale(I18n.default_site_locale) { self.slug }
+  end
+
   def fullpath_with_building(force = false)
     if self.fullpath_without_building.present? && !force
       self.fullpath_without_building
@@ -77,6 +81,16 @@ class Page
   end
 
   alias_method_chain :fullpath, :building
+
+  def fullpath_with_locale(locale)
+    url, locale = self.fullpath(true), locale.to_s
+
+    if locale != self.site.default_locale
+      url = File.join(locale, url)
+    end
+
+    url
+  end
 
   def with_cache?
     self.cache_strategy != 'none'

@@ -29,6 +29,20 @@ namespace :locomotive do
     end
   end
 
+  desc 'Prepare for i18n'
+  task :prepare_for_i18n => :environment do
+    Page.skip_callback(:validate, :before)
+    Page.skip_callback(:save, :after)
+
+    I18n.with_site_locale(ENV['LOCALE'] || Locomotive.config.site_locales.first) do
+      Page.all.each do |page|
+        page.template_dependencies = page.template_dependencies
+        page.snippet_dependencies = page.snippet_dependencies
+        page.save(:validate => false)
+      end
+    end
+  end
+
   desc 'Import a remote template described by its URL -- 2 options: SITE=name or id, RESET=by default false'
   task :import => :environment do
     url, site_name_or_id, reset = ENV['URL'], ENV['SITE'], Boolean.set(ENV['RESET']) || false

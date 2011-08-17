@@ -21,6 +21,10 @@ module Locomotive
           self._source.highlighted_field_value
         end
 
+        def _permalink
+          self._source._permalink
+        end
+
       end
     end
   end

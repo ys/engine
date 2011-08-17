@@ -17,7 +17,9 @@ module Locomotive
 
           render_no_page_error and return if @page.nil?
 
-          output = @page.render(locomotive_context)
+          output = I18n.with_locale(I18n.site_locale) do
+            @page.render(locomotive_context)
+          end
 
           self.prepare_and_set_response(output)
         end
@@ -96,7 +98,7 @@ module Locomotive
           :current_admin  => current_admin
         }
 
-        ::Liquid::Context.new({}, assigns, registers)
+        ::Liquid::Context.new({}, assigns, registers, true)
       end
 
       def prepare_and_set_response(output)
