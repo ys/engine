@@ -22,6 +22,7 @@ require 'locomotive/delayed_job'
 require 'locomotive/middlewares'
 require 'locomotive/session_store'
 require 'locomotive/hosting'
+require 'locomotive/i18n'
 
 module Locomotive
 

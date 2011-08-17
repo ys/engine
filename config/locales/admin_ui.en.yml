@@ -1,5 +1,14 @@
 en:
   admin:
+    locales:
+      en: English
+      de: German
+      fr: French
+      pt-BR: "Brazilian Portuguese"
+      it: Italian
+      nl: Dutch
+      es: Spanish
+
     buttons:
       login: Log in
       send_password: Send
@@ -168,13 +177,6 @@ en:
       edit:
         help: "Your name can be updated by clicking it. To apply your changes, click on the \"Save\" button."
         new_site: new site
-        en: English
-        de: German
-        fr: French
-        pt-BR: "Brazilian Portuguese"
-        it: Italian
-        nl: Dutch
-        es: Spanish
         ask_for_name: "Please type your new name"
 
     theme_assets:

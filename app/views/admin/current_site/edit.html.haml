@@ -2,6 +2,9 @@
 
 - content_for :submenu do
   = render_cell 'admin/settings_menu', :show
+  
+- content_for :actions do
+  = render_cell 'admin/site_locale_picker', :show, :site => current_site, :locale => I18n.site_locale
 
 - if can?(:manage, @site)
   - content_for :buttons do

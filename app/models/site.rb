@@ -1,6 +1,7 @@
 class Site
 
   include Locomotive::Mongoid::Document
+  include Mongoid::I18n
 
   ## Extensions ##
   extend Extensions::Site::SubdomainDomains
@@ -10,6 +11,7 @@ class Site
   ## fields ##
   field :name
   field :robots_txt
+  field :locales, :type => Array, :default => []
 
   ## associations ##
   references_many :pages, :validate => false
@@ -31,6 +33,10 @@ class Site
   accepts_nested_attributes_for :memberships
 
   ## methods ##
+
+  def default_locale
+    self.locales.first || Locomotive.config.site_locales.first
+  end
 
   def all_pages_in_once
     Page.quick_tree(self)

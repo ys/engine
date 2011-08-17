@@ -1,5 +1,14 @@
 de:
   admin:
+    locales:
+      en: Englisch
+      de: Deutsch
+      fr: Französisch
+      pt-BR: "Bras. Portugisisch"
+      it: "Italienisch"
+      nl: "Holländer"
+      es: "Spanisch"
+
     buttons:
       login: Einloggen
       send_password: Senden
@@ -157,13 +166,6 @@ de:
       edit:
         help: "Deinen Namen kannst du durch darauf klicken ändern."
         new_site: Neue Webseite
-        en: Englisch
-        de: Deutsch
-        fr: Französisch
-        pt-BR: "Bras. Portugisisch"
-        it: "Italienisch"
-        nl: "Holländer"
-        es: "Spanisch"
         ask_for_name: "Bitte gib deinen neuen Namen an"
 
     theme_assets:

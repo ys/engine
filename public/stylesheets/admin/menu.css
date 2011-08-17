@@ -107,7 +107,8 @@
     background: transparent url(/images/admin/menu/submenu/action-border.png) repeat-y left 0; }
     #submenu > .action a {
       margin-top: 18px;
-      display: inline-block;
+      display: block;
+      float: left;
       background: rgba(0, 0, 0, 0.4);
       border-radius: 16px;
       -moz-border-radius: 16px;

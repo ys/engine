@@ -1,0 +1,11 @@
+#site-locale-picker
+  %span.hand
+    &nbsp;
+
+  %ul
+    - @locales.each_with_index do |locale, index|
+      %li{ :class => "#{'first' if index == 0}" }
+
+        = image_tag "admin/icons/flags/#{locale}.png", :class => 'flag'
+
+        %span.text= locale

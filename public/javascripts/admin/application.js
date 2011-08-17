@@ -165,4 +165,11 @@ $(document).ready(function() {
     .trigger('refresh');
 
   $('.formtastic fieldset.inputs ol li:not(.item)').last().addClass('last');
+
+  // site locale picker
+  $('#site-locale-picker').hover(function() { $(this).addClass('open'); }, function() { $(this).removeClass('open'); })
+    .find('li:gt(0)').click(function(e) {
+      var locale = $(this).find('.text').html();
+      addParameterToURL('site_locale', locale);
+    });
 });

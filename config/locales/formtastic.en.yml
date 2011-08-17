@@ -10,6 +10,7 @@ en:
       raw_template: Template
       credentials: Credentials
       language: Language
+      locales: Locales
       sites: Sites
       access_points: Access points
       memberships: Accounts
@@ -67,6 +68,7 @@ en:
         seo_title: "Define a global value here which should be used as the value for the title tag in the head section."
         meta_keywords: "Meta keywords used within the head tag of the page. They are separated by a comma. Required for SEO."
         meta_description: "Meta description used within the head tag of the page. Required for SEO."
+        locales: "Drag&drop a flag to the first position to make it the default one."
         domain_name: "ex: locomotiveapp.org"
         robots_txt: "Content of the <span class='code'>/robots.txt</span> file. Check the following <a href='http://www.w3.org/TR/html4/appendix/notes.html#h-B.4.1.1'>url</a> for more information."
       theme_asset:

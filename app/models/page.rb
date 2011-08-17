@@ -1,6 +1,7 @@
 class Page
 
   include Locomotive::Mongoid::Document
+  include Mongoid::I18n
 
   ## Extensions ##
   include Extensions::Page::Tree
@@ -13,9 +14,9 @@ class Page
   include Extensions::Shared::Seo
 
   ## fields ##
-  field :title
-  field :slug
-  field :fullpath
+  localized_field :title
+  localized_field :slug
+  localized_field :fullpath
   field :raw_template
   field :published, :type => Boolean, :default => false
   field :cache_strategy, :default => 'none'
@@ -61,9 +62,9 @@ class Page
     self.index? || self.not_found?
   end
 
-  def fullpath(force = false)
-    if read_attribute(:fullpath).present? && !force
-      return read_attribute(:fullpath)
+  def fullpath_with_building(force = false)
+    if self.fullpath_without_building.present? && !force
+      self.fullpath_without_building
     end
 
     if self.index? || self.not_found?
@@ -74,6 +75,8 @@ class Page
       File.join slugs
     end
   end
+
+  alias_method_chain :fullpath, :building
 
   def with_cache?
     self.cache_strategy != 'none'

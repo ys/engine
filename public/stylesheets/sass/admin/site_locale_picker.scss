@@ -1,0 +1,105 @@
+/* ___ AUTOMATICALLY GENERATED: see admin/site_locale_picker.scss for the source file */
+
+@import "helpers";
+
+#site-locale-picker {
+
+  position: relative;
+
+  float: right;
+
+  margin: 18px 0 0 10px;
+  padding: 0px 25px 0 10px;
+
+  border: 1px solid transparent;
+
+  background: rgba(0, 0, 0, 0.4);
+  @include full-rounded(16px);
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 1);
+    @include full-rounded(12px);
+  }
+
+  .hand {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+
+    height: 7px;
+    width: 12px;
+
+    background: transparent url(/images/admin/menu/icons.png) no-repeat 0px -16px;
+  }
+
+  ul {
+    list-style: none;
+
+    margin: 0px;
+    padding: 0px;
+
+    li {
+      position: relative;
+
+      display: none;
+
+      margin: 5px 0;
+
+      height: 22px;
+      line-height: 20px;
+
+      cursor: pointer;
+
+      img.flag {
+        position: relative;
+        top: 1px;
+
+        width: 20px;
+        height: 20px;
+      }
+
+      span.text {
+        position: relative;
+
+        position: relative;
+        top: -6px;
+
+        color: #fff;
+        font-size: 0.7em;
+        text-shadow: 1px 1px 1px #000;
+        text-transform: uppercase;
+      }
+
+      &:first-child {
+        display: block;
+        margin: 0px;
+        cursor: default;
+      }
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+
+      &:hover {
+        span.text {
+          text-decoration: underline;
+        }
+      }
+
+    }
+  }
+
+  &.open {
+    ul {
+      li {
+        display: block;
+
+        &:first-child {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+
+}

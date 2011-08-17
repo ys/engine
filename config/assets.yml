@@ -93,6 +93,7 @@ stylesheets:
     - public/stylesheets/admin/formtastic_changes.css
     - public/stylesheets/admin/assets.css
     - public/stylesheets/admin/sites_picker.css
+    - public/stylesheets/admin/site_locale_picker.css
     - public/stylesheets/admin/application.css
     - public/stylesheets/admin/safari.css
     - public/stylesheets/admin/guiders-1.1.0.css

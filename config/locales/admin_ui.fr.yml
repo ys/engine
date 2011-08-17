@@ -1,5 +1,14 @@
 fr:
   admin:
+    locales:
+      en: en Anglais
+      de: en Allemand
+      fr: en Français
+      pt-BR: "en Portugais"
+      it: "en Italien"
+      nl: "en Hollandais"
+      es: en Espagnol
+
     errors:
       "500":
         title: Erreur applicative
@@ -169,13 +178,6 @@ fr:
       edit:
         help: "Votre nom est modifiable en cliquant dessus. Pour appliquer votre modification, cliquez après sur le bouton \"Modifier\""
         new_site: nouveau site
-        en: en Anglais
-        de: en Allemand
-        fr: en Français
-        pt-BR: "en Portugais"
-        it: "en Italien"
-        nl: "en Hollandais"
-        es: en Espagnol
         ask_for_name: "Veuillez entrer le nouveau nom"
 
     theme_assets:

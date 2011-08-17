@@ -2,6 +2,7 @@ class ContentInstance
 
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::I18n
 
   ## extensions ##
   include CustomFields::ProxyClassEnabler

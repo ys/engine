@@ -70,5 +70,6 @@ $(document).ready(function() {
     });
   }).hide();
 
-
+  // locales
+  $('#locales').sortable({ items: 'span', handle: 'label', tolerance: 'pointer', appendTo: 'body' });
 });

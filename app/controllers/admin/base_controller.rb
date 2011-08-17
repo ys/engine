@@ -15,6 +15,8 @@ module Admin
 
     before_filter :set_locale
 
+    before_filter :set_site_locale
+
     helper_method :sections, :current_site_url, :site_url, :page_url, :current_ability
 
     # https://rails.lighthouseapp.com/projects/8994/tickets/1905-apphelpers-within-plugin-not-being-mixed-in
@@ -71,7 +73,21 @@ module Admin
     end
 
     def set_locale
-      I18n.locale = current_admin.locale rescue Locomotive.config.default_locale
+      I18n.locale = current_admin.locale rescue Locomotive.config.default_locale # for the back-office
+    end
+
+    def set_site_locale
+      I18n.default_site_locale = current_site.default_locale
+
+      if params[:site_locale].present?
+        session[:site_locale] = params[:site_locale]
+      end
+
+      unless current_site.locales.include?(session[:site_locale])
+        session[:site_locale] = current_site.default_locale
+      end
+
+      I18n.site_locale = session[:site_locale]
     end
 
     # ___ site/page urls builder ___

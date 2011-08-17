@@ -1,0 +1,62 @@
+/* ___ AUTOMATICALLY GENERATED: see admin/site_locale_picker.scss for the source file */
+/* ___ rounded ___ */
+/* ___ box shadow ___ */
+/* ___ others ___ */
+#site-locale-picker {
+  position: relative;
+  float: right;
+  margin: 18px 0 0 10px;
+  padding: 0px 25px 0 10px;
+  border: 1px solid transparent;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px; }
+  #site-locale-picker:hover {
+    border-color: black;
+    border-radius: 12px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px; }
+  #site-locale-picker .hand {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    height: 7px;
+    width: 12px;
+    background: transparent url(/images/admin/menu/icons.png) no-repeat 0px -16px; }
+  #site-locale-picker ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px; }
+    #site-locale-picker ul li {
+      position: relative;
+      display: none;
+      margin: 5px 0;
+      height: 22px;
+      line-height: 20px;
+      cursor: pointer; }
+      #site-locale-picker ul li img.flag {
+        position: relative;
+        top: 1px;
+        width: 20px;
+        height: 20px; }
+      #site-locale-picker ul li span.text {
+        position: relative;
+        position: relative;
+        top: -6px;
+        color: #fff;
+        font-size: 0.7em;
+        text-shadow: 1px 1px 1px #000;
+        text-transform: uppercase; }
+      #site-locale-picker ul li:first-child {
+        display: block;
+        margin: 0px;
+        cursor: default; }
+      #site-locale-picker ul li:last-child {
+        margin-bottom: 0px; }
+      #site-locale-picker ul li:hover span.text {
+        text-decoration: underline; }
+  #site-locale-picker.open ul li {
+    display: block; }
+    #site-locale-picker.open ul li:first-child {
+      margin-bottom: 5px; }

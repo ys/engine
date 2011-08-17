@@ -508,7 +508,7 @@ form.formtastic fieldset ol li.has-many ul li.template span.actions button span 
   font-size: 0.8em;
 }
 
-/* ___ my account ___ */
+/* ___ language / locales ___ */
 
 form.formtastic fieldset.language li.full span {
   display: inline-block;
@@ -533,6 +533,14 @@ form.formtastic fieldset.language li.full span img {
 
 form.formtastic fieldset.language li.full span input {
   margin-right: 2px;
+}
+
+form.formtastic fieldset.locales li.full span:first-child label {
+  color: #000;
+}
+
+form.formtastic fieldset.locales p.inline-hints {
+  margin-top: 15px;
 }
 
 /* ___ membership ___ */

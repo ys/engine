@@ -9,6 +9,17 @@
   = f.input :meta_keywords
   = f.input :meta_description
 
+- if can?(:manage, current_site)
+  = f.foldable_inputs :name => :locales, :class => 'language locales' do
+    = f.custom_input :locales, { :css => 'full', :with_label => false } do
+      #locales
+        - ordered_site_locales(@site).each do |locale|
+          %span
+            = check_box_tag 'site[locales][]', locale, @site.locales.include?(locale), :id => "site-locales-#{locale}"
+            %label{ :for => "site-locales-#{locale}" }
+              = image_tag "admin/icons/flags/#{locale}.png"
+              = t("admin.locales.#{locale}")
+
 - if can?(:point, Site)
   - if manage_subdomain_or_domains?
     = f.foldable_inputs :name => :access_points, :class => 'editable-list off' do

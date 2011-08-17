@@ -30,4 +30,7 @@ module Admin::SitesHelper
     Locomotive.config.multi_sites?
   end
 
+  def ordered_site_locales(site)
+    site.locales + (Locomotive.config.site_locales - site.locales)
+  end
 end

@@ -4,9 +4,9 @@ module Extensions
       extend ActiveSupport::Concern
 
       included do
-        field :seo_title, :type => String
-        field :meta_keywords, :type => String
-        field :meta_description, :type => String
+        localized_field :seo_title
+        localized_field :meta_keywords
+        localized_field :meta_description
       end
 
     end # Seo

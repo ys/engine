@@ -33,6 +33,12 @@ module Locomotive
         path.gsub!(/\.[a-zA-Z][a-zA-Z0-9]{2,}$/, '') # remove the page extension
         path.gsub!(/^\//, '') # remove the leading slash
 
+        # extract the site locale
+        if path =~ /^(#{current_site.locales.join('|')})+(\/|$)/
+          I18n.site_locale = $1
+          path.gsub!($1 + $2, '')
+        end
+
         path = 'index' if path.blank?
 
         if path != 'index'
@@ -67,7 +73,10 @@ module Locomotive
           'params'            => self.params,
           'url'               => request.url,
           'now'               => Time.now.utc,
-          'today'             => Date.today
+          'today'             => Date.today,
+          'default_locale'    => I18n.default_site_locale.to_s,
+          'current_locale'    => I18n.site_locale.to_s,
+          'locales'           => current_site.locales
         }
 
         assigns.merge!(Locomotive.config.context_assign_extensions)

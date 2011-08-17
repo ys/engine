@@ -1,5 +1,35 @@
 BOARD:
 
+- i18n (in progress)
+  x site locales
+    x model
+    x ui
+  x locale picker
+  x patches
+    x i18n
+    x mongoid-i18n
+  x rendering engine
+    x get locale
+    x render the right version
+  - contents
+    x store the site locale value
+    - pages
+      x title / slug / fullpath / seo
+      - template ?
+      - editable contents
+    - custom contents
+    - snippets
+    x site
+      x seo
+      x locale picker
+  - liquid tags:
+    - link_to (new)
+    - nav
+    - locale switcher
+    - others ?    -
+  - other problems to solve:
+    - If you create a new page it shall always be created in the default_language, not depending on the used language in the backend.
+
 BACKLOG:
 
 - custom_fields:

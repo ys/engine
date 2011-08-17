@@ -112,7 +112,8 @@
 
     a {
       margin-top: 18px;
-      display: inline-block;
+      display: block;
+      float: left;
       background: rgba(0, 0, 0, 0.4);
       @include full-rounded(16px);
       padding: 0px 10px 0 15px;
