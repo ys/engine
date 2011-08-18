@@ -99,12 +99,6 @@ module Mongoid
       protected
 
       def localized_field?(name)
-        # puts "options[:type] = #{options[:type].inspect} / #{(options[:type] == LocalizedField).inspect}"
-
-        # return true if options[:type] == LocalizedField
-
-        # puts "self.localized_fields_list = #{self.localized_fields_list.inspect} / #{meth.inspect}"
-
         (self.localized_fields_list || []).any? do |rule|
           case rule
           when String, Symbol then name.to_s == rule.to_s
@@ -121,7 +115,7 @@ module Mongoid
 
       def create_accessors(name, meth, options = {})
         if options[:type] == LocalizedField
-          if options[:use_default_if_empty] != false # nil or true
+          if options[:use_default_if_empty] != false # neither nil nor true
             define_method(meth) do
               value = read_attribute(name)
               if value.is_a?(Hash)
@@ -141,13 +135,9 @@ module Mongoid
             end
           end
           define_method("#{meth}=") do |value|
-            # debugger
-            # puts "@attributes[name].present? = #{@attributes[name].present?.inspect} / !@attributes[name].is_a?(Hash) #{(!@attributes[name].is_a?(Hash)).inspect}"
             if !@attributes[name].nil? && !@attributes[name].is_a?(Hash)
               @attributes[name] = { ::I18n.default_site_locale.to_s => @attributes[name] }
             end
-
-            # puts "value = #{value.inspect} / #{meth}"
 
             value = if value.is_a?(Hash)
               (@attributes[name] || {}).merge(value)

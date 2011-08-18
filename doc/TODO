@@ -27,12 +27,15 @@ BOARD:
     x nav
     (- link_to (new)
     - others ?)    -
+  - theme_assets
   - other problems to solve:
     x If you create a new page it shall always be created in the default_language, not depending on the used language in the backend.
     - set the page slug for all the site locales
     - default site locale even if the i18n feature is disabled (the disable procedure is missing btw)
     - redirect for the default site locale if urls like /<default_site_locale>/....
     - inline editing
+    - with_scope is broken
+  - refactor
 
 BACKLOG:
 
