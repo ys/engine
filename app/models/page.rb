@@ -69,7 +69,7 @@ class Page
 
   def fullpath_with_building(force = false)
     if self.fullpath_without_building.present? && !force
-      self.fullpath_without_building
+      return self.fullpath_without_building
     end
 
     if self.index? || self.not_found?

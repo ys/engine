@@ -9,11 +9,11 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: locomotive_dev
+  database: locomotive_i18n_dev
 
 test:
   <<: *defaults
-  database: locomotive_test
+  database: locomotive_i18n_test
 
 # set these environment variables on your prod server
 production:
