@@ -8,6 +8,7 @@ fr:
       it: "en Italien"
       nl: "en Hollandais"
       es: en Espagnol
+      ru: en Russe
 
     errors:
       "500":

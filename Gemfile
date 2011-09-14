@@ -4,7 +4,7 @@ source :rubygems
 
 gem 'rake', '0.9.2'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.0.10'
 
 gem 'warden'
 gem 'devise', '1.3.4'
@@ -27,21 +27,21 @@ gem 'carrierwave', '0.5.6'
 gem 'dragonfly',  '~> 0.9.1'
 gem 'rack-cache', :require => 'rack/cache'
 
-gem 'custom_fields', '1.0.0.beta.23'
+gem 'custom_fields', '1.0.0.beta.25'
 gem 'cancan'
 gem 'fog', '0.8.2'
 gem 'mimetype-fu'
 gem 'actionmailer-with-request', :require => 'actionmailer_with_request'
 gem 'heroku', '1.19.1'
 gem 'httparty', '>= 0.6.1'
-gem 'RedCloth', '4.2.7'
+gem 'RedCloth', '4.2.8'
 gem 'delayed_job', '2.1.4'
 gem 'delayed_job_mongoid', '1.0.2'
 gem 'rubyzip'
 gem 'locomotive_jammit-s3', :require => 'jammit-s3'
 gem 'SystemTimer', :platforms => :ruby_18
 gem 'cells'
-
+gem 'sanitize'
 gem 'highline'
 
 # The rest of the dependencies are for use when in the locomotive dev environment
@@ -57,7 +57,7 @@ end
 group :test, :development do
   gem 'linecache', '0.43', :platforms => :mri_18
   gem 'ruby-debug', :platforms => :mri_18
-  gem 'ruby-debug19', :platforms => :mri_19
+  gem 'ruby-debug19', :platforms => :mri_19, :require => 'ruby-debug'
 
   gem 'bushido_stub', '0.0.3'
 
@@ -69,7 +69,7 @@ group :test do
   gem 'ZenTest'
   gem 'growl-glue'
   gem 'rspec-rails', '2.6.1'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 1.1'
   gem 'pickle'
   gem 'xpath', '~> 0.1.4'
   gem 'capybara'
@@ -77,7 +77,7 @@ group :test do
 
   gem 'spork', '~> 0.9.0.rc'
   gem 'launchy'
-  gem 'mocha', :git => 'git://github.com/floehopper/mocha.git'
+  gem 'mocha', '0.9.12' # :git => 'git://github.com/floehopper/mocha.git'
 end
 
 group :production do

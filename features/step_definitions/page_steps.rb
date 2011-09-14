@@ -2,7 +2,7 @@
 
 # helps create a simple content page (parent: "index") with a slug, contents, and template
 def create_content_page(page_slug, page_contents, template = nil)
-  @home = @site.pages.where(:slug => "index").first || Factory(:page)
+  @home = @site.pages.where(:slug => "index").first || FactoryGirl.create(:page)
   page = @site.pages.create(:slug => page_slug, :body => page_contents, :parent => @home, :title => "some title", :published => true, :raw_template => template)
   page.should be_valid
   page
@@ -26,7 +26,12 @@ end
 
 # try to render a page by slug
 When /^I view the rendered page at "([^"]*)"$/ do |path|
-  visit "http://#{@site.domains.first}#{path}"
+  # If we're running selenium then we need to use a differnt port
+  if Capybara.current_driver == :selenium
+    visit "http://#{@site.domains.first}:#{Capybara.server_port}#{path}"
+  else
+    visit "http://#{@site.domains.first}#{path}"
+  end
 end
 
 # checks to see if a string is in the slug

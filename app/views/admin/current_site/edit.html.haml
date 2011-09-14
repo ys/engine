@@ -6,10 +6,11 @@
 - content_for :actions do
   = render_cell 'admin/site_locale_picker', :show, :site => current_site, :locale => I18n.site_locale
 
-- if can?(:manage, @site)
-  - content_for :buttons do
+- content_for :buttons do
+  - if can?(:manage, @site)
     = admin_button_tag :export, new_admin_export_url, :class => 'new'
     = admin_button_tag :import, new_admin_import_url, :class => 'new'
+  - if can?(:create, Account)
     = admin_button_tag t('.new_membership'), new_admin_membership_url, :class => 'new'
 
 %p!= t('.help')
