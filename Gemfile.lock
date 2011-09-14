@@ -80,11 +80,7 @@ GEM
       capybara (>= 1.0.0)
       cucumber (~> 1.0.0)
       nokogiri (>= 1.4.6)
-<<<<<<< HEAD
-    custom_fields (1.0.0.beta.23)
-=======
     custom_fields (1.0.0.beta.25)
->>>>>>> master
       activesupport (~> 3.0.9)
       mongoid (= 2.0.2)
     daemons (1.1.4)
@@ -299,11 +295,7 @@ DEPENDENCIES
   carrierwave (= 0.5.6)
   cells
   cucumber-rails (= 1.0.2)
-<<<<<<< HEAD
-  custom_fields (= 1.0.0.beta.23)
-=======
   custom_fields (= 1.0.0.beta.25)
->>>>>>> master
   database_cleaner
   delayed_job (= 2.1.4)
   delayed_job_mongoid (= 1.0.2)

@@ -67,6 +67,39 @@ end
 ## MONGOID-I18n ##
 
 # TODO: fork https://github.com/Papipo/mongoid_i18n
+
+module Mongoid
+  module I18n
+    class LocalizedField < Hash
+
+      attr_accessor :type
+
+      def initialize(type = nil)
+        self.type = type || Object
+        super nil
+      end
+
+      def [](key)
+        self.type.set(super(key))
+      end
+
+      def []=(key, value)
+        super(key, self.type.set(value))
+      end
+
+      def merge(other_hash, &block)
+        # puts "merging #{other_hash.inspect}"
+        converted_hash = {}
+        other_hash.each { |k, v| converted_hash[k] = self.type.set(v) }
+        # puts "converted_hash = #{converted_hash.inspect}"
+        super(converted_hash, &block)
+      end
+
+    end
+  end
+end
+
+# DIRTY MONKEY PATCHING BEFORE THE REFACTORING
 module Mongoid
   module Criterion
     class Selector< Hash
@@ -91,7 +124,7 @@ module Mongoid
 
       def field(name, options = {})
         if localized_field?(name)
-          options.merge!(:type => LocalizedField, :default => LocalizedField.new)
+          options.merge!(:type => LocalizedField, :default => LocalizedField.new(options[:type]))
         end
         super
       end
@@ -115,11 +148,16 @@ module Mongoid
 
       def create_accessors(name, meth, options = {})
         if options[:type] == LocalizedField
-          if options[:use_default_if_empty] != false # neither nil nor true
+
+          if options[:use_default_if_empty] != false # either nil or true
             define_method(meth) do
               value = read_attribute(name)
               if value.is_a?(Hash)
-                value[::I18n.site_locale.to_s] || value[::I18n.default_site_locale.to_s] rescue ''
+                converted_value = options[:default].merge(value)
+
+                value = converted_value[::I18n.site_locale.to_s]
+
+                value.to_s.empty? ? converted_value[::I18n.default_site_locale.to_s] : value
               else
                 value
               end
@@ -128,31 +166,44 @@ module Mongoid
             define_method(meth) do
               value = read_attribute(name)
               if value.is_a?(Hash)
-                read_attribute(name)[::I18n.site_locale.to_s] rescue ''
+                converted_value = options[:default].merge(value)
+                options[:default].merge(value)[::I18n.site_locale.to_s]
               else
                 value
               end
             end
           end
+
           define_method("#{meth}=") do |value|
             if !@attributes[name].nil? && !@attributes[name].is_a?(Hash)
-              @attributes[name] = { ::I18n.default_site_locale.to_s => @attributes[name] }
+              # existing value but not localized yet
+              old_value = @attributes[name]
+              @attributes[name] = options[:default].merge(::I18n.default_site_locale.to_s => old_value)
             end
 
+            @attributes[name] ||= options[:default]
+
+            @attributes[name] = options[:default].merge(@attributes[name]) unless @attributes[name].is_a?(LocalizedField)
+
             value = if value.is_a?(Hash)
-              (@attributes[name] || {}).merge(value)
+              @attributes[name].merge(value)
             else
-              (@attributes[name] || {}).merge(::I18n.site_locale.to_s => value)
+              @attributes[name].merge(::I18n.site_locale.to_s => value)
             end
-            value = value.delete_if { |key, value| value.blank? } if options[:clear_empty_values] != false
+
+            value = value.delete_if { |key, value| value.to_s.empty? } if options[:clear_empty_values] != false
+
             write_attribute(name, value)
           end
+
           define_method("#{meth}_translations") { read_attribute(name) }
+
           if options[:clear_empty_values] != false
             define_method("#{meth}_translations=") { |value| write_attribute(name, value.delete_if { |key, value| value.blank? }) }
           else
             define_method("#{meth}_translations=") { |value| write_attribute(name, value) }
           end
+
         else
           super
         end
