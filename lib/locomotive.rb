@@ -9,6 +9,7 @@ require 'locomotive/dragonfly'
 require 'locomotive/liquid'
 require 'locomotive/mongoid'
 require 'locomotive/carrierwave'
+require 'locomotive/i18n'
 require 'locomotive/custom_fields'
 require 'locomotive/httparty'
 require 'locomotive/inherited_resources'
@@ -22,7 +23,6 @@ require 'locomotive/delayed_job'
 require 'locomotive/middlewares'
 require 'locomotive/session_store'
 require 'locomotive/hosting'
-require 'locomotive/i18n'
 
 module Locomotive
 

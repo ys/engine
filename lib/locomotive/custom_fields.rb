@@ -23,6 +23,13 @@ module CustomFields
     module Category
       class Item
 
+        include Mongoid::I18n
+
+        localized_fields :name, :position
+
+        field :name
+        field :position, :type => Integer, :default => 0
+
         def to_liquid
           { 'id' => self._id.to_s, 'name' => self.name }
         end
