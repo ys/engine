@@ -85,3 +85,9 @@ namespace :bushido do
   end
 end
 
+namespace :assets
+  task :precompile do
+    # re-built assets
+    Jammit.package!
+  end
+end
