@@ -85,7 +85,8 @@ namespace :bushido do
   end
 end
 
-namespace :assets
+namespace :assets do
+  desc "Compiles all of the app's assets before deploying"
   task :precompile do
     # re-built assets
     Jammit.package!
