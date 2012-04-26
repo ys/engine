@@ -9,3 +9,35 @@ x page with regexp url => wildcards
   - find_spec
   - features
 - clean code
+
+BACKLOG:
+
+- custom_fields:
+  - validation: regexp (pre-defined regexps ?)
+  x new type: belongs_to => association
+- inline editing (http://www.aloha-editor.com/wiki/index.php/Aloha_PHP_Example)
+  - html view in the aloha popup
+  - editable elements should wrap a tag: div, h1, ...etc (default span)
+  - edit images (upload new ones, ...etc) => wait for aloha or send them an email ?
+- upgrade warning if new version of locomotive (maybe based on the commit id)
+- deploying workflow:
+  - roll back a bad update
+  - conflicts with content types
+  - dev -> staging -> production
+  - sync data
+  - import only theme assets
+- endless pagination
+
+- tooltip to explain the difference between 1.) Admin 2.) Author 3.) Designer?
+- [bushido] guiders / welcome page / devise cas authentication (SSO)
+
+NICE TO HAVE:
+- export site
+- super_finder
+- traffic statistics
+- asset picker (content instance)
+- page with regexp url ?
+- automatic update !
+- page not found (front) => if logged in, link to create the page
+- switch to list (theme assets / assets ?). delete all in once (with checkbox) or see details (updated_at, size, ...etc)
+- code completion ? http://blog.quplo.com/2010/06/common-sense-code-completion/
