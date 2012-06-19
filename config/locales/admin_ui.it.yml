@@ -10,6 +10,7 @@ it:
 
     messages:
       confirm: Sicuro?
+      sending_form: "locomotive.messages.sending_form"
 
     shared:
       header:
@@ -165,7 +166,7 @@ it:
         pt-BR: "Portoghese Brasiliano"
         it: Italiano
         nl: Olandese
-        "no": Norvegese
+        nb: Norvegese
         es: Spagnolo
         ru: Russo
         ask_for_name: "Prego, digita il tuo nome"

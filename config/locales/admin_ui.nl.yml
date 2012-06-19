@@ -9,6 +9,7 @@ nl:
 
     messages:
       confirm: Weet u het zeker ?
+      sending_form: "locomotive.messages.sending_form"
 
     shared:
       header:
@@ -153,7 +154,7 @@ nl:
         pt-BR: "Braziliaans Portugees"
         it: Italiaans
         nl: Nederlands
-        "no": Noors
+        nb: Noors
         ru: Russisch
         ask_for_name: "Voer uw nieuwe naam in"
 

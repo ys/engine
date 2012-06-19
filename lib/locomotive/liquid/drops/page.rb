@@ -12,8 +12,6 @@ module Locomotive
         end
 
         def slug
-          # TODO
-          # self._source.templatized? ? self._source.content_type.slug.singularize : self._source.slug
           self._source.slug
         end
 

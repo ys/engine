@@ -12,7 +12,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
         # FIXME (Didier L.) unable for now to generate all the pages
       else
         xml.url do
-          xml.loc page_url(page, { :host => true })
+          xml.loc page_url(page)
           xml.lastmod page.updated_at.to_date.to_s('%Y-%m-%d')
           xml.priority 0.9
         end

@@ -6,7 +6,9 @@ Locomotive::Engine.routes.draw do
     :path         => '',
     :path_prefix  => nil,
     :failure_app  => 'Locomotive::Devise::FailureApp',
-    :controllers  => { :sessions => 'locomotive/sessions', :passwords => 'locomotive/passwords' } do
+    :controllers  => { :sessions => 'locomotive/sessions', :passwords => 'locomotive/passwords' }
+
+  devise_scope :locomotive_account do
       match '/'         => 'sessions#new'
       delete 'signout'  => 'sessions#destroy', :as => :destroy_locomotive_session
   end
@@ -67,6 +69,10 @@ Rails.application.routes.draw do
       resources :content_types
 
       resources :content_entries, :path => 'content_types/:slug/entries'
+
+      resources :sites
+
+      resources :memberships
 
       resource  :current_site, :controller => 'current_site'
 
