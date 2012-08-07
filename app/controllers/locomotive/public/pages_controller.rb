@@ -16,6 +16,8 @@ module Locomotive
 
       before_filter :set_locale, :only => [:show, :edit]
 
+      before_filter :load_entries, :only => :show_toolbar
+
       def show_toolbar
         render :layout => false
       end
@@ -41,6 +43,11 @@ module Locomotive
         ::I18n.locale = ::Mongoid::Fields::I18n.locale
 
         self.setup_i18n_fallbacks
+      end
+
+      def load_entries
+        @content_types = ContentType.all
+        @content_entries = ContentEntry.all
       end
 
     end

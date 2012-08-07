@@ -1,0 +1,8 @@
+%script{ :type => 'text/html', :id => 'content_entries_select' }
+  %li.item.back
+    = link_to t('.links.back'), '#', :class => 'back'
+  %li.item.new
+    = link_to t('.links.new'), '#', :class => 'new'
+
+%script{ :type => 'text/html', :id => 'content_entry_select' }     
+  = link_to "{{_slug}}", "{{_slug}}"

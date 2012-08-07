@@ -10,6 +10,11 @@ class Locomotive.Views.InlineEditor.ToolbarView extends Backbone.View
     'click  .element-actions a.save':             'save_changes'
     'click  .element-actions a.cancel':           'cancel_changes'
 
+  initialize: ->
+    console.log 'toolbar'
+    super
+    content_view = new Locomotive.Views.InlineEditor.ContentView(collection: Locomotive.content_types)
+
   render: ->
     super
 

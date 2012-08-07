@@ -26,6 +26,9 @@
         Locomotive.current_site     = new Locomotive.Models.Site(#{j current_site.to_json.html_safe});
         Locomotive.current_account  = new Locomotive.Models.Account(#{j current_locomotive_account.to_json.html_safe});
 
+        Locomotive.content_entries = new Locomotive.Models.ContentEntriesCollection(#{j @content_entries.to_json.html_safe });
+        Locomotive.content_types = new Locomotive.Models.ContentTypesCollection(#{j @content_types.to_json.html_safe });
+
         $(document).ready(function() {
 
           window.application_view = new Locomotive.Views.InlineEditor.ApplicationView();
@@ -60,6 +63,13 @@
           %label= t('.labels.save_changes')
           = link_to t('.buttons.confirm'), '#', :class => 'button blue save'
           = link_to t('.buttons.cancel'), '#', :class => 'button cancel'
+        #content-types.content-types.col
+          = link_to '#', :id => 'content-types-link', :class => 'button toggler' do
+            %span.hand
+            %span= t('.buttons.content_types')
+          .list-container.hide
+            = render_cell 'locomotive/content_types_select', :show, :content_types => @content_types
 
     = render_cell 'locomotive/content_locale_picker', :show, :site => current_site, :locale => current_content_locale
+    = render 'locomotive/public/pages/templates'
 

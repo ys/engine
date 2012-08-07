@@ -306,3 +306,8 @@ fr:
             back: "Revenir au panneau d'administration"
             confirm: "Valider"
             cancel: "Annuler"
+            content_types: "Modèles"
+        templates:
+          links:
+            back: '↩ Retour'
+            new: '+ Nouveau'

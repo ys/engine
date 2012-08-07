@@ -2,6 +2,7 @@
 @import "compass/css3/opacity";
 @import "compass/css3/box-shadow";
 @import "compass/css3/text-shadow";
+@import "../shared/picker";
 @import "buttons";
 
 #toolbar {
@@ -111,5 +112,48 @@
         @include button;
       } // .button
     } // .element-actions
+  }
+}
+#content-types-link {
+  @include button;
+}
+#content-types-select, #content-entries-select {
+  @include picker;
+
+  top: 152px;
+  right: 22px;
+
+  min-width: 63px;
+  z-index: 999;
+
+  li {
+    height: 26px;
+    padding: 2px 8px !important;
+
+    &:last-child {
+      border-bottom: 0px;
+      @include box-shadow(transparent 0 0 0 0);
+    }
+  }
+
+  list-style-type: none;
+  position: absolute;
+  right: 200px;
+  max-height: 700px;
+  overflow: scroll;
+  top: 44px;
+  li {
+    color: #aaa;
+    line-height: 26px;
+    cursor: pointer;
+    @include text-shadow(#000 0 1px 0);
+    a {
+      color: #aaa;
+      text-shadow: 1px 1px 1px #000;
+      text-decoration: none;
+    }
+    &:hover {
+      &, a { color: #fff; }
+    }
   }
 }
