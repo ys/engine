@@ -34,6 +34,7 @@ class Locomotive.Views.Shared.FormView extends Backbone.View
     options ||= { headers: {}, on_success: null, on_error: null }
 
     previous_attributes = _.clone @model.attributes
+    console.log @model
 
     @model.save {},
       headers:  options.headers

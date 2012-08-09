@@ -15,6 +15,7 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
     return @
 
   save: (event) ->
+    console.log @model
     @save_in_ajax event,
       headers:  { 'X-Flash': true }
       on_success: (response, xhr) =>
@@ -31,12 +32,13 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
       create: (event, ui) =>
         $(@el).prev().find('.ui-dialog-title').html(@$('h2').html())
         @$('h2').remove()
+        @custom_create_actions()
         actions = @$('.dialog-actions').appendTo($(@el).parent()).addClass('ui-dialog-buttonpane ui-widget-content ui-helper-clearfix')
 
         actions.find('#close-link').click (event) => @close(event)
         actions.find('input[type=submit]').click (event) =>
           # since the submit buttons are outside the form, we have to mimic the behaviour of a basic form
-          $form = @el.find('form'); $buttons_pane = $(event.target).parent()
+          $form = @$el.find('form'); $buttons_pane = $(event.target).parent()
 
           $.rails.disableFormElements($buttons_pane)
 
@@ -47,6 +49,7 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
         # nothing to do
 
   open: ->
+    console.log 'OPEN'
     parent_el = $(@el).parent()
     if @model.isNew()
       parent_el.find('.edit-section').hide()
@@ -64,6 +67,7 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
     @clear_errors()
     $(@el).dialog('overlayEl').unbind('click')
     $(@el).dialog('close')
+    @after_close_event(event)
 
   center: ->
     $(@el).dialog('option', 'position', 'center')
@@ -77,14 +81,11 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
     else
       @refresh()
 
-  slugify_label_field: ->
-    # disabled in a popup form
-
-  enable_has_many_fields: ->
-    # disabled in a popup form
-
-  enable_many_to_many_fields: ->
-    # disabled in a popup form
-
   tinyMCE_settings: ->
     window.Locomotive.tinyMCE.popupSettings
+
+  custom_create_actions: ->
+    #customize in subclasses
+
+  after_close_event: (event) ->
+    #customize in subclasses

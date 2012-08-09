@@ -66,7 +66,7 @@ class Locomotive.Views.Shared.Fields.HasManyView extends Backbone.View
       entry.set_attribute "position_in_#{@options.inverse_of}", index
 
   build_target_entry_view: ->
-    @target_entry_view = new Locomotive.Views.ContentEntries.PopupFormView
+    @target_entry_view = new Locomotive.Views.ContentEntries.SimplePopupFormView
       el:           $("##{@options.name}-template-entry")
       parent_view:  @
       model:        @options.new_entry.clone() # by default, it does not matter

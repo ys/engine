@@ -19,12 +19,12 @@ class Locomotive.Views.InlineEditor.ContentView extends Backbone.View
     current_type_slug = $(e.currentTarget).attr('href')[1..-1]
     content_entries = Locomotive.content_entries.where({'content_type_slug': current_type_slug })
     @current_type = @collection.where({slug:current_type_slug })[0]
-    @current_content_entries_view = new Locomotive.Views.InlineEditor.ContentEntriesView(content_type: @current_type, collection: new Locomotive.Models.ContentEntriesCollection(content_entries))
+    Locomotive.current_content_entries_view = new Locomotive.Views.InlineEditor.ContentEntriesView(content_type: @current_type, collection: new Locomotive.Models.ContentEntriesCollection(content_entries))
     @$('#content-types-select').hide()
-    @$('.list-container').append(@current_content_entries_view.render().el)
+    @$('.list-container').append(Locomotive.current_content_entries_view.render().el)
 
   show_content_types: (e) ->
     e.stopPropagation() & e.preventDefault()
-    @current_content_entries_view.leave()
+    Locomotive.current_content_entries_view.leave()
     @$('#content-types-select').show()
 

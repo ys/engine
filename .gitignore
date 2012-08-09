@@ -43,3 +43,5 @@ app/assets/javascripts/old/
 app/assets/stylesheets/old/
 .rbenv-gemsets
 
+
+app/views/locomotive/custom_fields/types/_many_to_many.html.haml

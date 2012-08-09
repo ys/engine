@@ -13,20 +13,28 @@ class Locomotive.Views.InlineEditor.ContentEntriesView extends Backbone.View
     @content_type = options['content_type']
 
   render: () ->
-    console.log @collection
     @$el.append ich.content_entries_select()
     for content_entry in @collection.models
       content_entry_view = new Locomotive.Views.InlineEditor.ContentEntryView(model: content_entry)
-      console.log content_entry
-      @$el.append content_entry_view.render().el #ich.content_entry_select(con.toJSON())
+      @$el.append content_entry_view.render().el
     @
 
   show_new_popup_for_content_type: (e) ->
     e.stopPropagation() & e.preventDefault()
-    console.log 'NEW POPUP'
-    request = $.get "/admin/content_types/#{@content_type.get('slug')}/entries/new"
-    request.success (data) ->
-      console.log data
+    sample = @collection.models[0]
+    model = new Locomotive.Models.ContentEntry
+      content_type_slug: @content_type.get('slug')
+      safe_attributes: sample?.get('safe_attributes')
+      file_custom_fields: sample?.get('file_custom_fields')
+      has_many_custom_fields: sample?.get('has_many_custom_fields')
+      many_to_many_custom_fields: sample?.get('many_to_many_custom_fields')
+      select_custom_fields: sample?.get('select_custom_fields')
+    @modal_form_view?.leave()
+    @modal_form_view = new Locomotive.Views.InlineEditor.ModalFormView(model: model)
+    @modal_form_view.render().open()
+    $('.list-container').hide()
+    $('#content-types-select').show()
+    @leave()
 
   leave: ->
     @off()

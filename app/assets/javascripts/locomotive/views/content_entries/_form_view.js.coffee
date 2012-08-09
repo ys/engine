@@ -133,7 +133,7 @@ class Locomotive.Views.ContentEntries.FormView extends Locomotive.Views.Shared.F
     @$('li.input.toggle input[type=checkbox]').checkToggle('sync')
 
   remove: ->
-    @_select_field_view.remove()
+    @_select_field_view?.remove()
     _.each @_file_field_views, (view) => view.remove()
     _.each @_has_many_field_views, (view) => view.remove()
     _.each @_many_to_many_field_views, (view) => view.remove()

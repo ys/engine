@@ -9,4 +9,6 @@
  *= require locomotive/backoffice/content_assets.css
  *= require_tree ./shared
  *= require_tree ./inline_editor
+ *= require formtastic
+ *= require ./backoffice/formtastic_changes
 */

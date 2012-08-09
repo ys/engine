@@ -4,5 +4,21 @@
   %li.item.new
     = link_to t('.links.new'), '#', :class => 'new'
 
-%script{ :type => 'text/html', :id => 'content_entry_select' }     
+%script{ :type => 'text/html', :id => 'content_entry_select' }
   = link_to "{{_slug}}", "{{_slug}}"
+
+%script{ :type => 'text/html', :id => 'content_entry_form' }
+  %h2
+    %span.new-section= t('locomotive.content_entries.new.title', :type => '{{title}}').html_safe
+    %span.edit-section= t('locomotive.content_entries.edit.title', :type => '{{title}}').html_safe
+
+  {{{data}}}
+
+  .dialog-actions
+    = link_to t('locomotive.buttons.close'), '#', :id => 'close-link'
+
+    .button-wrapper
+      %span.new-section= submit_tag t('locomotive.shared.form_actions.create'), :'data-disable-with' => t('locomotive.shared.form_actions.disable_with')
+      %span.edit-section= submit_tag t('locomotive.shared.form_actions.update'), :'data-disable-with' => t('locomotive.shared.form_actions.disable_with')
+
+= render 'locomotive/public/pages/templates_from_custom_fields'  
