@@ -26,6 +26,7 @@
 #= require_tree ./views/content_assets
 #= require_tree ./views/shared
 #= require_tree ./views/content_entries
+#= require_tree ./views/content_types
 #= require_tree ./views/inline_editor
 
 window.Locomotive =

@@ -17,6 +17,7 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
       @$el.html ich.content_entry_form({title: @model.get('content_type_slug'), data: data})
       hbs_templates = ($(elm).attr('id') for elm in @$el.find('script[type="text/html"]'))
       @add_new_templates(hbs_templates)
+      @options[key] = value for key, value of application_view.view_data
       super()
 
   save: (event) ->
@@ -28,10 +29,10 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
         @close()
 
   custom_create_actions: ->
-    #@$('#local-actions-bottom-bar').remove()
+    @$('#local-actions-bottom-bar').remove()
     @$('>p').remove()
     @$('fieldset.foldable').remove()
-    actions = @$('#modal-form>form>.dialog-actions').appendTo($(@el).parent()).addClass('ui-dialog-buttonpane ui-widget-content ui-helper-clearfix')
+    actions = @$('>.dialog-actions').appendTo($(@el).parent()).addClass('ui-dialog-buttonpane ui-widget-content ui-helper-clearfix')
     actions.find('#close-link').click (event) => @close(event)
     actions.find('input[type=submit]').click (event) =>
       # since the submit buttons are outside the form, we have to mimic the behaviour of a basic form
@@ -43,7 +44,6 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
 
   leave: ->
     @off()
-    console.log @$el
     @$el.dialog( "destroy" )
     @remove()
     $('body').append('<div id=modal-form></div>')
@@ -52,10 +52,13 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
     @leave()
 
   add_new_templates: (templates) ->
+    trash = []
     for key in templates
       delete ich[key]
       delete ich.templates[key]
       ich.addTemplate(key, $("##{key}").html())
+      trash.unshift($("##{key}"));
+    t.remove() for t in trash
 
   add_or_update: (response) ->
     entry = new Locomotive.Models.ContentEntry(response)
