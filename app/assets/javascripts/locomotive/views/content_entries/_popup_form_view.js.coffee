@@ -15,7 +15,6 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
     return @
 
   save: (event) ->
-    console.log @model
     @save_in_ajax event,
       headers:  { 'X-Flash': true }
       on_success: (response, xhr) =>
@@ -33,16 +32,6 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
         $(@el).prev().find('.ui-dialog-title').html(@$('h2').html())
         @$('h2').remove()
         @custom_create_actions()
-        actions = @$('.dialog-actions').appendTo($(@el).parent()).addClass('ui-dialog-buttonpane ui-widget-content ui-helper-clearfix')
-
-        actions.find('#close-link').click (event) => @close(event)
-        actions.find('input[type=submit]').click (event) =>
-          # since the submit buttons are outside the form, we have to mimic the behaviour of a basic form
-          $form = @$el.find('form'); $buttons_pane = $(event.target).parent()
-
-          $.rails.disableFormElements($buttons_pane)
-
-          $form.trigger('submit').bind 'ajax:complete', => $.rails.enableFormElements($buttons_pane)
 
       open: (event, ui, extra) =>
         $(@el).dialog('overlayEl').bind 'click', => @close()

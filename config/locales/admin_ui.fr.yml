@@ -59,6 +59,10 @@ fr:
         update: Mettre à jour
         send: Envoyer
         disable_with: En cours...
+      form:
+        change_file: Changer
+        delete_file: Supprimer
+        cancel: Annuler
 
     notifications:
       new_content_entry:

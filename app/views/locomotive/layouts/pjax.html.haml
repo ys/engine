@@ -1,0 +1,9 @@
+= yield :head
+%script{ :type => 'text/javascript' }
+  :plain
+    $(document).ready(function() {
+      window.application_view.flash=      #{flash.to_json};
+      window.application_view.view_data=  { #{backbone_view_data} };
+    });
+= yield
+= yield :foot

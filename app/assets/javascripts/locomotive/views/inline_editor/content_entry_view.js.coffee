@@ -14,6 +14,7 @@ class Locomotive.Views.InlineEditor.ContentEntryView extends Backbone.View
 
   show_edition_popup: (e) ->
     e.stopPropagation() & e.preventDefault()
+    console.log e
     @modal_form_view?.leave()
     @modal_form_view = new Locomotive.Views.InlineEditor.ModalFormView(model: @model)
     @modal_form_view.render().open()
