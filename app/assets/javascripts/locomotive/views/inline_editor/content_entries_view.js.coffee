@@ -4,10 +4,10 @@ class Locomotive.Views.InlineEditor.ContentEntriesView extends Backbone.View
 
   tagName: 'ul'
   id: 'content-entries-select'
-  className: 'list'
 
   events:
     'click .new': 'show_new_popup_for_content_type'
+    'click .back': 'show_content_types'
 
   initialize: (options) ->
     @content_type = options['content_type']
@@ -15,9 +15,13 @@ class Locomotive.Views.InlineEditor.ContentEntriesView extends Backbone.View
   render: () ->
     @$el.append ich.content_entries_select()
     for content_entry in @collection.models
-      content_entry_view = new Locomotive.Views.InlineEditor.ContentEntryView(model: content_entry)
+      content_entry_view = new Locomotive.Views.InlineEditor.ContentEntryView(model: content_entry, parent: @)
       @$el.append content_entry_view.render().el
     @
+
+  show_content_types: (e) ->
+    e.stopPropagation() & e.preventDefault()
+    @leave()
 
   show_new_popup_for_content_type: (e) ->
     e.stopPropagation() & e.preventDefault()
@@ -33,9 +37,9 @@ class Locomotive.Views.InlineEditor.ContentEntriesView extends Backbone.View
     @modal_form_view = new Locomotive.Views.InlineEditor.ModalFormView(model: model)
     @modal_form_view.render().open()
     $('.list-container').hide()
-    $('#content-types-select').show()
     @leave()
 
   leave: ->
+    @trigger('leave')
     @off()
     @remove()

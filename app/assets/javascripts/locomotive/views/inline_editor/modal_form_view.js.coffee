@@ -15,8 +15,8 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
 
     request.success (data) =>
       @$el.html ich.content_entry_form({title: @model.get('content_type_slug'), data: data})
-      hbs_templates = ($(elm).attr('id') for elm in @$el.find('script[type="text/html"]'))
-      @add_new_templates(hbs_templates)
+
+      @add_new_templates()
       @options[key] = value for key, value of application_view.view_data
       super()
 
@@ -51,7 +51,8 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
   after_close_event: (event) ->
     @leave()
 
-  add_new_templates: (templates) ->
+  add_new_templates: () ->
+    templates = ($(elm).attr('id') for elm in @$el.find('script[type="text/html"]'))
     trash = []
     for key in templates
       delete ich[key]

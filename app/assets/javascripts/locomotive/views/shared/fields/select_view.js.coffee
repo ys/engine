@@ -33,8 +33,8 @@ class Locomotive.Views.Shared.Fields.SelectView extends Backbone.View
       zIndex:   window.application_view.unique_dialog_zindex()
       width:    770,
       create: (event, ui) =>
-        $(@el).prev().find('.ui-dialog-title').html(@$('h2').html())
-        @$('h2').remove()
+        $(@el).prev().find('.ui-dialog-title').html(@$('>h2').html())
+        @$('>h2').remove()
 
         @$form =          @$('.placeholder').formSubmitNotification() # fake form
         @$buttons_pane =  @$('.dialog-actions').appendTo($(@el).parent()).addClass('ui-dialog-buttonpane ui-widget-content ui-helper-clearfix')

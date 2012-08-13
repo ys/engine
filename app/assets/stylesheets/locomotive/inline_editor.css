@@ -10,5 +10,5 @@
  *= require_tree ./shared
  *= require_tree ./inline_editor
  *= require formtastic
- *= require ./backoffice/formtastic_changes
+ *= require_tree ./backoffice
 */

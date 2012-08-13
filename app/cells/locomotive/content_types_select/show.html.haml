@@ -1,4 +1,4 @@
-%ul#content-types-select.list
+%ul#content-types-select
   - @content_types.each do |type|
     %li.item
       = link_to type.name, "##{type.slug}"

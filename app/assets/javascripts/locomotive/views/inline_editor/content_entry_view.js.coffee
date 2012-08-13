@@ -6,7 +6,11 @@ class Locomotive.Views.InlineEditor.ContentEntryView extends Backbone.View
   className: 'entry'
 
   events:
-    'click a': 'show_edition_popup'
+    'click': 'show_edition_popup'
+
+  initialize: (options) ->
+    @parent = options['parent']
+    @parent.on('leave', @leave, @)
 
   render: () ->
     @$el.append ich.content_entry_select(@model.toJSON())
@@ -20,5 +24,9 @@ class Locomotive.Views.InlineEditor.ContentEntryView extends Backbone.View
     @modal_form_view.render().open()
     $('.list-container').hide()
     $('#content-types-select').show()
-    Locomotive.current_content_entries_view.leave()
+    @parent.leave()
+
+  leave: ->
+    @off()
+    @remove()
 

@@ -29,8 +29,8 @@ class Locomotive.Views.ContentEntries.PopupFormView extends Locomotive.Views.Con
       zIndex:   window.application_view.unique_dialog_zindex()
       width:    770,
       create: (event, ui) =>
-        $(@el).prev().find('.ui-dialog-title').html(@$('h2').html())
-        @$('h2').remove()
+        $(@el).prev().find('.ui-dialog-title').html(@$('>h2').html())
+        @$('>h2').remove()
         @custom_create_actions()
 
       open: (event, ui, extra) =>
