@@ -18,7 +18,6 @@ class Locomotive.Models.ContentType extends Backbone.Model
 
   fetchEntries: (options = {})->
     entries = new Locomotive.Models.ContentEntriesCollection(content_type_slug: @get('slug'))
-    console.log options
     entries.fetch(options)
 
 class Locomotive.Models.ContentTypesCollection extends Backbone.Collection

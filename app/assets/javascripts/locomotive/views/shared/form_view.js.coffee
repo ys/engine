@@ -64,7 +64,7 @@ class Locomotive.Views.Shared.FormView extends Backbone.View
 
       title.click (event) =>
         event.stopPropagation() & event.preventDefault()
-        newValue = prompt(title.attr('title'), title.html());
+        newValue = prompt(title.attr('title'), title.html())
         if newValue && newValue != ''
           title.html(newValue)
           target.val(newValue).trigger('change')
