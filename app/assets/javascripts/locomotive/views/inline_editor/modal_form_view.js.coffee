@@ -37,9 +37,7 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
     actions.find('input[type=submit]').click (event) =>
       # since the submit buttons are outside the form, we have to mimic the behaviour of a basic form
       $form = @$el.find('form'); $buttons_pane = $(event.target).parent()
-
       $.rails.disableFormElements($buttons_pane)
-
       $form.trigger('submit').bind 'ajax:complete', => $.rails.enableFormElements($buttons_pane)
 
   leave: ->
@@ -69,5 +67,5 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
       Locomotive.content_entries.add(entry)
 
   reload_content_page: () ->
-    $('#page iframe').attr('src', $('#page iframe').attr('src'))
+    $('#page iframe').attr('src', window.location.pathname.replace('_admin', '_edit'))
 
