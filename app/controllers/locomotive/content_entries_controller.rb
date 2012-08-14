@@ -9,7 +9,7 @@ module Locomotive
 
     before_filter :set_content_type
 
-    respond_to :json, :only => [:show, :edit, :create, :update, :sort]
+    respond_to :json, :only => [:index, :show, :edit, :create, :update, :sort]
 
     skip_load_and_authorize_resource
 

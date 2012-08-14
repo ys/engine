@@ -57,5 +57,17 @@ class Locomotive.Models.ContentEntriesCollection extends Backbone.Collection
 
   url: "#{Locomotive.mounted_on}/content_types/:slug/entries"
 
+  initialize: (options = {}) ->
+    if options['content_type_slug']?
+      @url = @url.replace(':slug', options['content_type_slug'])
+
   toMinJSON: ->
     @map (entry) => entry.toMinJSON()
+
+  add_or_update: (entries) ->
+    for entry in entries
+      if @get(entry.id)?
+        @get(entry.id).set(entry.attributes)
+      else
+        @add(entry)
+

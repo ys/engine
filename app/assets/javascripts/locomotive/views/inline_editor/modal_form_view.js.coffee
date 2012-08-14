@@ -26,6 +26,7 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
       on_success: (response, xhr) =>
         @add_or_update(response)
         @reload_content_page()
+        @reload_content_entries()
         @close()
 
   custom_create_actions: ->
@@ -61,11 +62,14 @@ class Locomotive.Views.InlineEditor.ModalFormView extends Locomotive.Views.Conte
 
   add_or_update: (response) ->
     entry = new Locomotive.Models.ContentEntry(response)
-    if Locomotive.content_entries.get(entry.id)?
-      Locomotive.content_entries.get(entry.id).set(entry.attributes)
-    else
-      Locomotive.content_entries.add(entry)
+    Locomotive.content_entries.add_or_update([entry])
 
   reload_content_page: () ->
     $('#page iframe').attr('src', window.location.pathname.replace('_admin', '_edit'))
+
+  reload_content_entries: () ->
+    for content_type in Locomotive.content_types.models
+      content_entries = content_type.fetchEntries
+        success: (collection, response) ->
+          Locomotive.content_entries.add_or_update collection.models
 

@@ -16,6 +16,11 @@ class Locomotive.Models.ContentType extends Backbone.Model
       delete hash.entries_custom_fields
       hash.entries_custom_fields_attributes = @get('entries_custom_fields').toJSONForSave() if @get('entries_custom_fields')? && @get('entries_custom_fields').length > 0
 
+  fetchEntries: (options = {})->
+    entries = new Locomotive.Models.ContentEntriesCollection(content_type_slug: @get('slug'))
+    console.log options
+    entries.fetch(options)
+
 class Locomotive.Models.ContentTypesCollection extends Backbone.Collection
 
   model: Locomotive.Models.ContentType
