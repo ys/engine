@@ -24,7 +24,7 @@ module Locomotive
           {{else}}
           #{without_file_html}
           {{/if}}).html_safe,
-        :type => 'text/html', :id => "#{method}_file_input")
+        :type => 'text/html', :id => "#{builder.object.content_type.slug}_#{method}_file_input")
     end
 
     def with_file_html

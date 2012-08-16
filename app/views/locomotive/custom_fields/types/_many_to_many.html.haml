@@ -9,7 +9,7 @@
 
   - content_for :head do
 
-    %script{ :type => 'text/html', :id => "#{name}_list" }
+    %script{ :type => 'text/html', :id => "#{content_type_slug}_#{name}_list" }
 
       %p.empty{ :style => 'display: none' }!= t('.empty')
 
@@ -24,7 +24,7 @@
         %span.actions
           = link_to t('locomotive.buttons.new_item'), '#', :class => 'add'
 
-    %script{ :type => 'text/html', :id => "#{name}_entry" }
+    %script{ :type => 'text/html', :id => "#{content_type_slug}_#{name}_entry" }
       %li
         .handle.col
           = image_tag 'locomotive/form/icons/drag.png'

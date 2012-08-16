@@ -16,14 +16,13 @@ class Locomotive.Views.Shared.Fields.FileView extends Backbone.View
     'click a.delete': 'toggle_delete'
 
   template: ->
-    ich["#{@options.name}_file_input"]
+    ich["#{@model.get('content_type_slug')}_#{@options.name}_file_input"]
 
   render: ->
     url   = @model.get("#{@options.name}_url") || ''
     data  =
       filename: url.split('/').pop()
       url:      url
-
     $(@el).html(@template()(data))
 
     # only in HTML 5

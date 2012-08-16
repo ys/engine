@@ -146,6 +146,9 @@
     color: #aaa;
     line-height: 26px;
     cursor: pointer;
+    &.new{
+      border-bottom: solid lightgrey 1px;
+    }
     @include text-shadow(#000 0 1px 0);
     a {
       color: #aaa;
@@ -157,3 +160,4 @@
     }
   }
 }
+

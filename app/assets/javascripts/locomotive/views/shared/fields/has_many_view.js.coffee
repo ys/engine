@@ -13,10 +13,10 @@ class Locomotive.Views.Shared.Fields.HasManyView extends Backbone.View
     'click ul span.actions a.remove': 'remove_entry'
 
   template: ->
-    ich["#{@options.name}_list"]
+    ich["#{@model.get('content_type_slug')}_#{@options.name}_list"]
 
   entry_template: ->
-    ich["#{@options.name}_entry"]
+    ich["#{@model.get('content_type_slug')}_#{@options.name}_entry"]
 
   initialize: ->
     _.bindAll(@, 'refresh_position_entries')

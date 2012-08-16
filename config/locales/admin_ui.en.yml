@@ -311,3 +311,7 @@ en:
             back: Return to back-office
             confirm: Confirm
             cancel: Cancel
+        templates:
+          links:
+            back: '↩ Retour'
+            new: '+ Nouveau'
