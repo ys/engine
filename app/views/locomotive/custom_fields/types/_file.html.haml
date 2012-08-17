@@ -1,4 +1,5 @@
 = f.input name,
   :label  => field.label,
   :hint   => field.hint,
-  :as     => :'Locomotive::File'
+  :as     => :'Locomotive::File',
+  :wrapper_html => { :id => "content_entry_#{content_type_slug}_#{name}_input" }

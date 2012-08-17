@@ -2,7 +2,8 @@
   :label      => field.label,
   :hint       => field.hint,
   :as         => :select,
-  :collection => field.ordered_select_options.map { |option| [option.name, option.id] }
+  :collection => field.ordered_select_options.map { |option| [option.name, option.id] },
+  :wrapper_html => { :id => "content_entry_#{content_type_slug}_#{name}_id_input" }
 
 - content_for :head do
 

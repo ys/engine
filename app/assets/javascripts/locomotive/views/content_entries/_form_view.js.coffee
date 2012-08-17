@@ -70,7 +70,7 @@ class Locomotive.Views.ContentEntries.FormView extends Locomotive.Views.Shared.F
     @_select_field_view = new Locomotive.Views.Shared.Fields.SelectView model: @content_type
 
     _.each @model.get('select_custom_fields'), (name) =>
-      $input_wrapper = @$("##{@model.paramRoot}_#{name}_id_input")
+      $input_wrapper = @$("##{@model.paramRoot}_#{@model.get('content_type_slug')}_#{name}_id_input")
 
       $input_wrapper.append(ich.edit_select_options_button())
 
@@ -92,19 +92,19 @@ class Locomotive.Views.ContentEntries.FormView extends Locomotive.Views.Shared.F
 
       @_file_field_views.push(view)
 
-      @$("##{@model.paramRoot}_#{name}_input label").after(view.render().el)
+      @$("##{@model.paramRoot}_#{@model.get('content_type_slug')}_#{name}_input label").after(view.render().el)
 
   enable_has_many_fields: ->
     unless @model.isNew()
       _.each @model.get('has_many_custom_fields'), (field) =>
         name = field[0]; inverse_of = field[1]
-        new_entry = new Locomotive.Models.ContentEntry(@options["#{name}_new_entry"])
+        new_entry = new Locomotive.Models.ContentEntry(@options["#{@model.get('content_type_slug')}_#{name}_new_entry"])
         view      = new Locomotive.Views.Shared.Fields.HasManyView model: @model, name: name, new_entry: new_entry, inverse_of: inverse_of
 
         if view.ui_enabled()
           @_has_many_field_views.push(view)
 
-          @$("##{@model.paramRoot}_#{name}_input label").after(view.render().el)
+          @$("##{@model.paramRoot}_#{@model.get('content_type_slug')}_#{name}_input label").after(view.render().el)
 
   enable_many_to_many_fields: ->
     _.each @model.get('many_to_many_custom_fields'), (field) =>

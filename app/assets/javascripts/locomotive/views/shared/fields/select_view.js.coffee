@@ -21,7 +21,6 @@ class Locomotive.Views.Shared.Fields.SelectView extends Backbone.View
 
   render_for: (name, callback) ->
     @name = name; @on_save_callback = callback
-
     @custom_field = @model.get('entries_custom_fields').find((field) => field.get('name') == @name)
 
     @render()

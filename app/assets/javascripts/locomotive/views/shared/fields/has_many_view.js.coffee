@@ -67,7 +67,7 @@ class Locomotive.Views.Shared.Fields.HasManyView extends Backbone.View
 
   build_target_entry_view: ->
     @target_entry_view = new Locomotive.Views.ContentEntries.SimplePopupFormView
-      el:           $("##{@options.name}-template-entry")
+      el:           $("##{@model.get('content_type_slug')}-#{@options.name}-template-entry")
       parent_view:  @
       model:        @options.new_entry.clone() # by default, it does not matter
 

@@ -7,7 +7,7 @@
     :label      => field.label,
     :hint       => field.hint,
     :as         => :'Locomotive::Empty',
-    :wrapper_html => { :id => "content_entry_#{name}_input", :class => 'empty relationship input' }
+    :wrapper_html => { :id => "content_entry_#{content_type_slug}_#{name}_input", :class => 'empty relationship input' }
 
   - content_for :head do
 
@@ -37,11 +37,11 @@
 
   - content_for :backbone_view_data do
     :plain
-      , #{name}_new_entry: #{new_target_content_entry.to_json}
+      , #{content_type_slug}_#{name}_new_entry: #{new_target_content_entry.to_json}
 
   - content_for :foot do
 
-    %div{ :id => "#{name}-template-entry", :style => 'display: none' }
+    %div{ :id => "#{content_type_slug}-#{name}-template-entry", :style => 'display: none' }
 
       %h2
         %span.new-section= t('locomotive.content_entries.new.title', :type => name.capitalize).html_safe

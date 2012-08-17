@@ -7,6 +7,9 @@ class Locomotive.Views.ContentEntries.SimplePopupFormView extends Locomotive.Vie
   slugify_label_field: ->
     # disabled in a popup form
 
+  enable_select_fields: ->
+    #disabled in a popup form
+
   enable_has_many_fields: ->
     # disabled in a popup form
 
